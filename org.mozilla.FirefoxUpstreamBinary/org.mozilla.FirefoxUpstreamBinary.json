@@ -1,7 +1,7 @@
 {
     "app-id": "org.mozilla.FirefoxUpstreamBinary",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.22",
+    "runtime-version": "3.24",
     "sdk": "org.gnome.Sdk",
     "command": "firefox",
     /*"tags": [""],*/
@@ -15,11 +15,19 @@
         /* Wayland access */
         "--socket=wayland",
         /* We don't want full fs access so we can read the files */
-        "--filesystem=home:rw",
+        /*"--filesystem=home:rw",*/
         /* Needs to talk to the network: */
         "--share=network",
+        /* Use dark decorations for window */
+        "--env=GTK_THEME_VARIANT=dark",
         /* Enable playing sound thru pulseaudio */
-        "--socket=pulseaudio"
+        "--socket=pulseaudio",
+        /* Keep user profile after application exit */
+        "--persist=.mozilla/",
+        /* Allow access to Download folder */
+        "--filesystem=xdg-download:rw",
+        /* Enable access to dri */
+        "--device=dri"
     ],
     "build-options" : {
         "cflags": "-O2 -g",
@@ -40,8 +48,8 @@
           "sources": [
               {
                   "type": "archive",
-                  "url": "https://archive.mozilla.org/pub/firefox/releases/52.0.1/linux-x86_64/en-US/firefox-52.0.1.tar.bz2",
-                  "sha256": "086aba1a19a395d189d04ea951e7555e44c06ccf9a5fd77ce005108559808dcc",
+                  "url": "https://archive.mozilla.org/pub/firefox/releases/55.0/linux-x86_64/en-US/firefox-55.0.tar.bz2",
+                  "sha256": "be8c22ac815af71eebbce83e2a646a10d9d875b4a470a7b251efe94ddb7045df",
                   "dest": "firefox"
               },
               {
